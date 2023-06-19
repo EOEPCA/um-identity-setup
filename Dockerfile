@@ -1,13 +1,7 @@
-# Base container
-FROM python:3.6
-
-# Add requirements, code
-COPY src/* /
-RUN pip install -r requirements.txt
-
-# Declare and expose service listening port
-# EXAMPLE PORT - PLEASE REPLACE WITH REAL ONES
-EXPOSE 8081/tcp
-
-# Declare entrypoint of that exposed service
-ENTRYPOINT ["python3", "./main.py"]
+# run keycloak-setup to configure Keycloak
+FROM python:alpine
+WORKDIR /app
+COPY identity-setup/ identity-setup/
+COPY utils/ identity-setup/src/utils/
+RUN pip install -r identity-setup/requirements.txt
+RUN python identity-setup/src/main.py
