@@ -1,7 +1,7 @@
 <!--
 ***
 *** To avoid retyping too much info. Do a search and replace for the following:
-*** um-service-template
+*** um-identity-setup
 -->
 
 <!-- PROJECT SHIELDS -->
@@ -21,39 +21,38 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/EOEPCA/um-service-template">
+  <a href="https://github.com/EOEPCA/um-identity-setup">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">um-service-template</h3>
+<h3 align="center">um-identity-setup</h3>
 
   <p align="center">
-    Template for developing an EOEPCA Service
+    Scripts to set up the Identity.
     <br />
-    <a href="https://github.com/EOEPCA/um-service-template"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/EOEPCA/um-identity-setup"><strong>Explore the docs »</strong></a>
     <br />
-    <a href="https://github.com/EOEPCA/um-service-template">View Demo</a>
+    <a href="https://github.com/EOEPCA/um-identity-setup">View Demo</a>
     ·
-    <a href="https://github.com/EOEPCA/um-service-template/issues">Report Bug</a>
+    <a href="https://github.com/EOEPCA/um-identity-setup/issues">Report Bug</a>
     ·
-    <a href="https://github.com/EOEPCA/um-service-template/issues">Request Feature</a>
+    <a href="https://github.com/EOEPCA/um-identity-setup/issues">Request Feature</a>
   </p>
 </p>
 
 ## Table of Contents
 
-- [Steps to use this template](#steps-to-use-this-template)
 - [Table of Contents](#table-of-contents)
 - [About The Project](#about-the-project)
-  - [Built With](#built-with)
+    - [Built With](#built-with)
 - [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Testing](#testing)
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
+    - [Testing](#testing)
 - [Documentation](#documentation)
 - [Usage](#usage)
-  - [Running the template service](#running-the-template-service)
-  - [Upgrading Gradle Wrapper](#upgrading-gradle-wrapper)
+    - [Running the template service](#running-the-template-service)
+    - [Upgrading Gradle Wrapper](#upgrading-gradle-wrapper)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [License](#license)
@@ -64,7 +63,13 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+
+Includes scripts to set up the Identity:
+
+- Registers default realms
+- Registers default users
+- Registers needed clients
+- Registers default resources
 
 ### Built With
 
@@ -97,18 +102,34 @@ vagrant ssh
 3. Clone the repo
 
 ```sh
-git clone https://github.com/EOEPCA/um-service-templategit
+git clone https://github.com/EOEPCA/um-identity-setupgit
 ```
 
 4. Change local directory
 
 ```sh
-cd template-service
+cd um-identity-setup
+```
+
+### Build and Execute
+
+Local:
+
+```shell
+pip install -r .\requirements.txt
+python src/main.py
+```
+
+Docker:
+
+```shell
+docker build -f identity-setup/Dockerfile . -t identity-setup
+docker run --rm -d --name identity-setup identity-setup
 ```
 
 ## Documentation
 
-The component documentation can be found at https://eoepca.github.io/um-service-template/.
+The component documentation can be found at https://eoepca.github.io/um-identity-setup/.
 
 <!-- USAGE EXAMPLES -->
 
@@ -122,7 +143,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 ## Roadmap
 
-See the [open issues](https://github.com/EOEPCA/um-service-template/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/EOEPCA/um-identity-setup/issues) for a list of proposed features (and known issues).
 
 <!-- CONTRIBUTING -->
 
@@ -146,21 +167,20 @@ Distributed under the Apache-2.0 License. See `LICENSE` for more information.
 
 [EOEPCA mailbox](eoepca.systemteam@telespazio.com)
 
-Project Link: [https://github.com/EOEPCA/um-service-template](https://github.com/EOEPCA/um-service-template)
+Project Link: [https://github.com/EOEPCA/um-identity-setup](https://github.com/EOEPCA/um-identity-setup)
 
 ## Acknowledgements
 
 - README.md is based on [this template](https://github.com/othneildrew/Best-README-Template) by [Othneil Drew](https://github.com/othneildrew).
 
-
-[contributors-shield]: https://img.shields.io/github/contributors/EOEPCA/um-service-templatesvg?style=flat-square
-[contributors-url]: https://github.com/EOEPCA/um-service-template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/EOEPCA/um-service-templatesvg?style=flat-square
-[forks-url]: https://github.com/EOEPCA/um-service-template/network/members
-[stars-shield]: https://img.shields.io/github/stars/EOEPCA/um-service-templatesvg?style=flat-square
-[stars-url]: https://github.com/EOEPCA/um-service-template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/EOEPCA/um-service-templatesvg?style=flat-square
-[issues-url]: https://github.com/EOEPCA/um-service-template/issues
-[license-shield]: https://img.shields.io/github/license/EOEPCA/um-service-templatesvg?style=flat-square
-[license-url]: https://github.com/EOEPCA/um-service-template/blob/master/LICENSE
-[build-shield]: https://www.travis-ci.com/EOEPCA/um-service-templatesvg?branch=master
+[contributors-shield]: https://img.shields.io/github/contributors/EOEPCA/um-identity-setupsvg?style=flat-square
+[contributors-url]: https://github.com/EOEPCA/um-identity-setup/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/EOEPCA/um-identity-setupsvg?style=flat-square
+[forks-url]: https://github.com/EOEPCA/um-identity-setup/network/members
+[stars-shield]: https://img.shields.io/github/stars/EOEPCA/um-identity-setupsvg?style=flat-square
+[stars-url]: https://github.com/EOEPCA/um-identity-setup/stargazers
+[issues-shield]: https://img.shields.io/github/issues/EOEPCA/um-identity-setupsvg?style=flat-square
+[issues-url]: https://github.com/EOEPCA/um-identity-setup/issues
+[license-shield]: https://img.shields.io/github/license/EOEPCA/um-identity-setupsvg?style=flat-square
+[license-url]: https://github.com/EOEPCA/um-identity-setup/blob/master/LICENSE
+[build-shield]: https://www.travis-ci.com/EOEPCA/um-identity-setupsvg?branch=master
