@@ -25,7 +25,7 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">um-identity-setup</h3>
+<h3 align="center">Identity Setup</h3>
 
   <p align="center">
     Scripts to set up the Identity.
