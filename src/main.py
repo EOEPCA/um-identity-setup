@@ -3,9 +3,9 @@ import base64
 import logging
 import os
 
-import utils.logger as logger
-from utils.configuration import load_configuration, edit_keycloak_config
-from utils.keycloak_client import KeycloakClient
+import identityutils.logger as logger
+from identityutils.configuration import load_configuration, edit_keycloak_config
+from identityutils.keycloak_client import KeycloakClient
 
 config_path = os.path.join(os.path.dirname(__file__), "../conf/config.ini")
 keycloak_config_path = os.path.join(os.path.dirname(__file__), "../conf/keycloak.cfg")
