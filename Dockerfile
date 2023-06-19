@@ -1,7 +1,7 @@
 # run keycloak-setup to configure Keycloak
 FROM python:alpine
+RUN apk add --no-cache git
 WORKDIR /app
-COPY identity-setup/ identity-setup/
-COPY utils/ identity-setup/src/utils/
-RUN pip install -r identity-setup/requirements.txt
-RUN python identity-setup/src/main.py
+COPY . .
+RUN pip install -r requirements.txt
+RUN python src/main.py
