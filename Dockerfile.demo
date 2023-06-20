@@ -3,6 +3,6 @@ FROM python:alpine
 RUN apk add --no-cache git
 WORKDIR /app
 COPY . .
-ENV ENV develop
+ENV ENV demo
 RUN pip install -r requirements.txt
 RUN python src/main.py

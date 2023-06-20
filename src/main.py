@@ -3,6 +3,9 @@ import base64
 import logging
 import os
 
+from keycloak import KeycloakConnectionError
+from retry.api import retry_call
+
 import identityutils.logger as logger
 from identityutils.configuration import load_configuration, edit_keycloak_config
 from identityutils.keycloak_client import KeycloakClient
@@ -25,9 +28,9 @@ def register_default_users():
     Create default users
     """
     eric_id = keycloak.create_user("eric", "eric")
-    print('Created Eric user: ' + eric_id)
+    logger.debug('Created Eric user: ' + eric_id)
     alice_id = keycloak.create_user("alice", "alice")
-    print('Created Alice user: ' + alice_id)
+    logger.debug('Created Alice user: ' + alice_id)
 
 
 def register_oauth2_proxy_client():
@@ -44,17 +47,21 @@ def register_oauth2_proxy_client():
     }
     keycloak.register_client(options=options)
 
+def keycloak_client(config):
+    logger.info("Starting Keycloak client...")
+    return KeycloakClient(server_url=config.get("Keycloak", "auth_server_url"),
+                          realm=config.get("Keycloak", "realm"),
+                          resource_server_endpoint=config.get("Keycloak", "resource_server_endpoint"),
+                          username=config.get("Keycloak", "admin_username"),
+                          password=config.get("Keycloak", "admin_password")
+                          )
 
 if __name__ == '__main__':
     config = load_configuration(config_path)
     # regenerate cookie secret
     edit_keycloak_config(keycloak_config_path, "cookie_secret", base64.urlsafe_b64encode(os.urandom(32)).decode())
-    keycloak = KeycloakClient(server_url=config.get("Keycloak", "auth_server_url"),
-                              realm=config.get("Keycloak", "realm"),
-                              resource_server_endpoint=config.get("Keycloak", "resource_server_endpoint"),
-                              username=config.get("Keycloak", "admin_username"),
-                              password=config.get("Keycloak", "admin_password")
-                              )
+    keycloak = retry_call(keycloak_client, fargs=[config], exceptions=KeycloakConnectionError, delay=1, backoff=1.5,
+                          jitter=(1, 2), logger=logger)
     register_oauth2_proxy_client()
     register_default_resources()
     register_default_users()

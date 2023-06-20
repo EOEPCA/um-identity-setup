@@ -99,13 +99,13 @@ This is an example of how to list things you need to use the software and how to
 vagrant ssh
 ```
 
-3. Clone the repo
+2. Clone the repo
 
 ```sh
 git clone https://github.com/EOEPCA/um-identity-setupgit
 ```
 
-4. Change local directory
+3. Change local directory
 
 ```sh
 cd um-identity-setup
@@ -124,7 +124,7 @@ Docker:
 
 ```shell
 docker build -f identity-setup/Dockerfile . -t identity-setup
-docker run --rm -d --name identity-setup identity-setup
+docker run -d --name identity-setup identity-setup
 ```
 
 ## Documentation

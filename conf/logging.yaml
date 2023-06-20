@@ -15,7 +15,7 @@ handlers:
 
   file:
     class: logging.handlers.RotatingFileHandler
-    filename: ../../logs/identity-setup.log
+    filename: out.log
     formatter: verbose
     level: DEBUG
     maxBytes: 1073741824   ## 1 GB log file size before rotation
