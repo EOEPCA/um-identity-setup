@@ -4,5 +4,5 @@ RUN apk add --no-cache git
 WORKDIR /app
 COPY . .
 ENV ENV develop
-RUN pip install -r requirements.txt
+RUN pip install -r requirements.develop.txt
 RUN python src/main.py

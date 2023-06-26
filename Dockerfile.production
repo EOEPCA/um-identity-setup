@@ -4,5 +4,5 @@ RUN apk add --no-cache git
 WORKDIR /app
 COPY . .
 ENV ENV production
-RUN pip install -r requirements.txt
+RUN pip install -r requirements.production.txt
 RUN python src/main.py
