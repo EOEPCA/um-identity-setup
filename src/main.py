@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import base64
 import logging
 import os
 
@@ -10,8 +9,17 @@ import identityutils.logger as logger
 from identityutils.configuration import load_configuration, edit_keycloak_config
 from identityutils.keycloak_client import KeycloakClient
 
-config_path = os.path.join(os.path.dirname(__file__), "../conf/config.ini")
-keycloak_config_path = os.path.join(os.path.dirname(__file__), "../conf/keycloak.cfg")
+mode = os.environ.get('FLASK_ENV')
+if mode == 'develop':
+    config_file = "config.develop.ini"
+elif mode == 'demo':
+    config_file = "config.demo.ini"
+elif mode == 'production':
+    config_file = "config.production.ini"
+else:
+    config_file = "config.ini"
+config_path = os.path.join(os.path.dirname(__file__), "../conf/", config_file)
+
 logger.Logger.get_instance().load_configuration(os.path.join(os.path.dirname(__file__), "../conf/logging.yaml"))
 logger = logging.getLogger("IDENTITY_SETUP")
 
@@ -47,6 +55,7 @@ def register_oauth2_proxy_client():
     }
     keycloak.register_client(options=options)
 
+
 def keycloak_client(config):
     logger.info("Starting Keycloak client...")
     return KeycloakClient(server_url=config.get("Keycloak", "auth_server_url"),
@@ -56,10 +65,9 @@ def keycloak_client(config):
                           password=config.get("Keycloak", "admin_password")
                           )
 
+
 if __name__ == '__main__':
     config = load_configuration(config_path)
-    # regenerate cookie secret
-    edit_keycloak_config(keycloak_config_path, "cookie_secret", base64.urlsafe_b64encode(os.urandom(32)).decode())
     keycloak = retry_call(keycloak_client, fargs=[config], exceptions=KeycloakConnectionError, delay=1, backoff=1.5,
                           jitter=(1, 2), logger=logger)
     register_oauth2_proxy_client()

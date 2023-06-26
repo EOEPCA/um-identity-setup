@@ -3,5 +3,6 @@ FROM python:alpine
 RUN apk add --no-cache git
 WORKDIR /app
 COPY . .
+ENV ENV develop
 RUN pip install -r requirements.txt
-CMD ["python", "src/main.py"]
+RUN python src/main.py

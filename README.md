@@ -123,7 +123,7 @@ python src/main.py
 Docker:
 
 ```shell
-docker build -f identity-setup/Dockerfile . -t identity-setup
+docker build . -t identity-setup
 docker run -d --name identity-setup identity-setup
 ```
 
